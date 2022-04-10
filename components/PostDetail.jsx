@@ -1,7 +1,80 @@
 import React from 'react'
+import parse from 'html-react-parser' // add this import
+import moment from 'moment'
+import Image from 'next/image'
+
+const PostDetail = ({ post }) => {
+  return (
+    <>
+      <div className="mb-8 rounded-lg bg-white pb-12 shadow-lg lg:p-8">
+        <a
+          href="https://shop.ledger.com/pages/ledger-nano-x?r=c6e336748d14"
+          target={'_blank'}
+        >
+          <Image
+            className="gb"
+            src="http://affiliate.ledger.com/image/728/90"
+            alt="ledger-photo-link"
+            width={728}
+            height={90}
+          />
+        </a>
+        <div className="relative mb-6 overflow-hidden shadow-md">
+          <img
+            src={post.featuredImage.url}
+            alt=""
+            className="h-full w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
+          />
+        </div>
+        <div className="px-4 lg:px-0">
+          <div className="mb-8 flex w-full items-center">
+            <div className="mr-8 hidden items-center items-center justify-center md:flex lg:mb-0 lg:w-auto">
+              <img
+                alt={post.author.name}
+                height="30px"
+                width="30px"
+                className="rounded-full align-middle"
+                src={post.author.photo.url}
+              />
+              <p className="ml-2 inline align-middle text-lg font-medium text-gray-700">
+                {post.author.name}
+              </p>
+            </div>
+            <div className="font-medium text-gray-700">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-2 inline h-6 w-6 text-pink-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <span className="align-middle">
+                {moment(post.createdAt).format('MMM DD, YYYY')}
+              </span>
+            </div>
+          </div>
+          <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
+          {parse(post.content.html)}
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default PostDetail
+
+/* import React from 'react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import moment from 'moment'
 import Link from 'next/link'
+import parse from 'html-react-parser'
 
 const PostDetail = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
@@ -66,6 +139,14 @@ const PostDetail = ({ post }) => {
             src={obj.src}
           />
         )
+      case 'bulleted-list':
+        return (
+          <ul key={index} className="text-md mb-4 font-semibold">
+            {modifiedText.map((item, i) => (
+              <React.Fragment key={i}>{item}</React.Fragment>
+            ))}
+          </ul>
+        )
       default:
         return modifiedText
     }
@@ -116,16 +197,18 @@ const PostDetail = ({ post }) => {
             </div>
           </div>
           <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
-          {/*           {post.content.raw.children.map((typeObj, index) => {
-            const children = typeObj.children.map((item, itemindex) =>
-              getContentFragment(itemindex, item.text, item)
-            )
-
-            return getContentFragment(index, children, typeObj, typeObj.type)
-          })} */}
+          {parse(post.content.html)}
           <RichText
-            content={post.content.raw.children}
+            content={post.content.children}
             renderers={{
+              h1: ({ children }) => <h1 className="text-white">{children}</h1>,
+              bold: ({ children }) => <strong>{children}</strong>,
+              ul: ({ children }) => (
+                <ul className="mb-8 text-3xl font-semibold">{children}</ul>
+              ),
+              li: ({ children }) => (
+                <li className="mb-8 text-3xl font-semibold">{children}</li>
+              ),
               a: ({ children, openInNewTab, href, rel, ...rest }) => {
                 if (href.match(/^https?:\/\/|^\/\//i)) {
                   return (
@@ -139,11 +222,12 @@ const PostDetail = ({ post }) => {
                     </a>
                   )
                 }
-
                 return (
-                  <Link href={href}>
-                    <a {...rest}>{children}</a>
-                  </Link>
+                  <div>
+                    <Link href={href}>
+                      <a {...rest}>{children}</a>
+                    </Link>
+                  </div>
                 )
               },
             }}
@@ -154,4 +238,4 @@ const PostDetail = ({ post }) => {
   )
 }
 
-export default PostDetail
+export default PostDetail */

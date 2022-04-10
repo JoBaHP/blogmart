@@ -35,6 +35,7 @@ export const getPosts = async () => {
   `
 
   const result = await request(graphqlAPI, query)
+  console.log(graphqlAPI)
 
   return result.postsConnection.edges
 }
@@ -73,7 +74,7 @@ export const getPostDetails = async (slug) => {
         createdAt
         slug
         content {
-          raw
+          html
         }
         categories {
           name
@@ -221,21 +222,21 @@ export const submitComment = async (obj) => {
   return result.json()
 }
 
-/* export const getComments = async (slug) => {
+export const getComments = async (slug) => {
   const query = gql`
-    query GetComments($slug:String!) {
-      comments(where: {post: {slug:$slug}}){
+    query GetComments($slug: String!) {
+      comments(where: { post: { slug: $slug } }) {
         name
         createdAt
         comment
       }
     }
-  `;
+  `
 
-  const result = await request(graphqlAPI, query, { slug });
+  const result = await request(graphqlAPI, query, { slug })
 
-  return result.comments;
-}; */
+  return result.comments
+}
 
 export const getRecentPosts = async () => {
   const query = gql`
