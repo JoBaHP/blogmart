@@ -6,9 +6,9 @@ const CommentsForm = ({ slug }) => {
   const [localStorage, setLocalStorage] = useState(null)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   const [formData, setFormData] = useState({
-    name: null,
-    email: null,
-    comment: null,
+    name: '',
+    email: '',
+    comment: '',
     storeData: false,
   })
 
@@ -54,11 +54,11 @@ const CommentsForm = ({ slug }) => {
     }
 
     if (storeData) {
-      window.localStorage.setItem('name', name)
-      window.localStorage.setItem('email', email)
+      localStorage.setItem('name', name)
+      localStorage.setItem('email', email)
     } else {
-      window.localStorage.removeItem('name')
-      window.localStorage.removeItem('email')
+      localStorage.removeItem('name')
+      localStorage.removeItem('email')
     }
 
     submitComment(commentObj).then((res) => {
@@ -83,7 +83,7 @@ const CommentsForm = ({ slug }) => {
   return (
     <div className="mb-8 rounded-lg bg-white p-8 pb-12 shadow-lg">
       <h3 className="mb-8 border-b pb-4 text-xl font-semibold">
-        LEAVE A REPLY
+        Leave a Reply
       </h3>
       <div className="mb-4 grid grid-cols-1 gap-4">
         <textarea
@@ -135,7 +135,7 @@ const CommentsForm = ({ slug }) => {
         <button
           type="button"
           onClick={handlePostSubmission}
-          className="ease inline-block cursor-pointer rounded-full bg-cyan-500 px-8 py-3 text-lg font-medium text-white transition duration-500 hover:bg-indigo-900"
+          className="ease inline-block cursor-pointer rounded-full bg-pink-600 px-8 py-3 text-lg font-medium text-white transition duration-500 hover:bg-indigo-900"
         >
           Post Comment
         </button>

@@ -12,7 +12,7 @@ const PostCard = ({ post }) => (
         unoptimized
         loader={grpahCMSImageLoader}
         alt={post.title}
-        className="rounded-t-lg shadow-lg lg:rounded-lg"
+        className="absolute h-80 w-full rounded-t-lg shadow-lg lg:rounded-lg"
         layout="fill"
         src={post.featuredImage.url}
       />
@@ -31,7 +31,6 @@ const PostCard = ({ post }) => (
     <div className="mb-8 block w-full items-center justify-center text-center lg:flex">
       <div className="mb-4 mr-8 flex w-full items-center items-center justify-center lg:mb-0 lg:w-auto">
         <Image
-          unoptimized
           loader={grpahCMSImageLoader}
           alt={post.author.name}
           height="30px"

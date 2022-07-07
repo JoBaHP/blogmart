@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
+/* import { useState } from 'react' */
 
 export default function () {
-  const [state, setState] = useState(0)
+  /*   const [state, setState] = useState(0)
   const [errorMsg, setErrorMsg] = useState('')
   // 0 - initial , 1 - loading, 2 - success, 2 - error
   const subscribe = async (e) => {
@@ -26,13 +26,13 @@ export default function () {
       setErrorMsg(e)
       setState(3)
     }
-  }
+  } */
   return (
     <div>
       <footer className=" fixed inset-x-0 bottom-0  bg-gray-100 text-center">
-        <div className="px-4">
+        {/*         <div className="px-4">
           {state == 2 ? (
-            <p className=" text-gray-700">
+            <p className=" text-pink-700">
               Thanks for subscribing. Don't worry, we won't spam you!
             </p>
           ) : (
@@ -83,14 +83,14 @@ export default function () {
               </div>
             </form>
           )}
-        </div>
+        </div> */}
         <div
           className="p-1 text-center text-gray-700"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.2) ' }}
         >
           © 2022 Copyright:
-          <a className="text-pink-600" href="/">
-            Blogmart.info
+          <a className="text-pink-600" href="https://build-up.us/">
+            BuildUP
           </a>
         </div>
       </footer>
