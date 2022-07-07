@@ -9,6 +9,22 @@ import Head from 'next/head'
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Script
+        id="ga-tag"
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+
+      <Script id="ga-datalayer" strategy="lazyOnload">
+        {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+      </Script>
       <Head>
         <meta charSet="UTF-8" />
         <meta
@@ -25,19 +41,6 @@ function MyApp({ Component, pageProps }) {
           name="description"
           content="An honest firsthand opinion - follow this steps to save on trading. Choose the best deal and solution for product you are planning to purchase."
         />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${process.env.NEXT_PUBLIC_ANALYTICS_ID}');
-        `}
-        </Script>
       </Head>
 
       <Layout>
