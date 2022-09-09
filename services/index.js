@@ -35,9 +35,8 @@ export const getPosts = async () => {
   `
 
   const result = await request(graphqlAPI, query)
-  console.log(graphqlAPI)
 
-  return result.postsConnection.edges
+  return result.postsConnection.edges.reverse()
 }
 
 export const getCategories = async () => {
@@ -74,7 +73,7 @@ export const getPostDetails = async (slug) => {
         createdAt
         slug
         content {
-          html
+          raw
         }
         categories {
           name
